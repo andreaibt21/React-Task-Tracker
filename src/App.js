@@ -19,23 +19,27 @@ function App() {
     getTasks();
   }, []);
 
+  const url = "https://623cbb83db0fc039d4aea4b7.mockapi.io/tasks/";
+  // To work with json-server:
+  // const url = "http://localhost:5000/tasks/"
+
   //Fetch Tasks
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/tasks");
+    const res = await fetch(url);
     const data = await res.json();
 
     return data;
   };
   //Fetch Task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id} `);
+    const res = await fetch(`${url}${id} `);
     const data = await res.json();
 
     return data;
   };
   //Add task
   const addTask = async (task) => {
-    const res = await fetch("http://localhost:5000/tasks", {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -52,7 +56,7 @@ function App() {
   };
   // Delete tasks
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id} `, {
+    await fetch(`${url}${id} `, {
       method: "DELETE",
     });
 
@@ -68,7 +72,7 @@ function App() {
       reminder: !taskToToggle.reminder,
     };
 
-    const res = await fetch(`http://localhost:5000/tasks/${id} `, {
+    const res = await fetch(`${url}${id} `, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
